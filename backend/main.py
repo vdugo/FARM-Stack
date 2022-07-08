@@ -1,7 +1,15 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+from database import (
+    fetch_one_todo,
+    fetch_all_todos,
+    create_todo,
+    update_todo,
+    delete_todo
+)
 
 origins = ['https://localhost:3000']
 
@@ -18,7 +26,7 @@ async def root():
     return {"hello": "world"}
 
 @app.get('/api/todo')
-async def get_todo():
+async def get_todos():
     return 1
 
 @app.get('/api/todo/{id}')
